@@ -23,9 +23,9 @@ class QuestionModelTests(TestCase):
         recent_question = Question(pub_date=time)
         self.assertIs(recent_question.was_published_recently(), True)
 
-    def create_question(question_text, days):
-        time = timezone.now() + datetime.timedelta(days=days)
-        return Question.objects.create(question_text=question_text, pub_date=time)
+def create_question(question_text, days):
+    time = timezone.now() + datetime.timedelta(days=days)
+    return Question.objects.create(question_text=question_text, pub_date=time)
 
 class QuestionIndexdViewTests(TestCase):
     def test_no_questions(self):
@@ -35,7 +35,7 @@ class QuestionIndexdViewTests(TestCase):
         self.assertQuerysetEqual(response.context['latest_question_list'],[])
 
     def test_past_question(self):
-        create_question(question_text="Past question.", day=-30)
+        create_question(question_text="Past question.", days=-30)
         response = self.client.get(reverse('polls:indexs'))
         self.assertQuerysetEqual(
             response.context['latest_question_list'],
