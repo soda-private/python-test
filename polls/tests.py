@@ -29,6 +29,7 @@ def create_question(question_text, days):
 
 class QuestionIndexdViewTests(TestCase):
     def test_no_questions(self):
+        print(reverse('polls:index'))
         response = self.client.get(reverse('polls:index'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "No polls are available.")
