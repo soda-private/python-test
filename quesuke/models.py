@@ -13,6 +13,7 @@ class QuestionDetail(models.Model):
     question_text = models.TextField()
     question_type = models.TextField()
     rank = models.IntegerField()
+    del_flg = models.IntegerField(default=0)
 
 
 # Create your models here.
